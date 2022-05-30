@@ -1,0 +1,978 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; Using Machine Learning and Statistical Analysis Methods in the Diagnostics of Heart Disease</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Using Machine Learning and Statistical Analysis Methods in the Diagnostics of Heart Disease</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-description.html">
+   Data Set Description
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-loading-clining.html">
+   Data loading and clining
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="research-progress.html">
+   Research progress
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/diagnostics-of-heart-disease.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/fedddot/heart-disease.git"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/fedddot/heart-disease.git/issues/new?title=Issue%20on%20page%20%2Fdiagnostics-of-heart-disease.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/fedddot/heart-disease.git/master?urlpath=tree/docs/diagnostics-of-heart-disease.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><no title></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Using Machine Learning and Statistical Analysis Methods in the Diagnostics of Heart Disease</h1>
+<p><i>Idan Rom, Israel, 2022</i></p>
+<h2>Abstract</h2>
+<p>This study aims to explore the possibilities of statistical analysis and machine learning methods in the diagnosis of heart disease. Within the study, we will work with available data on almost three hundred patients (laboratory measurements, anamnesis, diagnosis) and try to find a functional relationship between these data and the diagnosis.</p>
+<h2>Study plan</h2>
+<p>Within this study, we will go through the full cycle of working with data. We will load a raw dataset, clean it from incorrect and irrelevant information, analyze the statistical significance of each parameter in making predictions, and apply several interesting data dimensionality reduction methods. Finally, we will build several machine learning models to analyze the data, test them and compare the results.<br></p>
+<p>Mathematically speaking, we will try to establish a relationship of the form (1), expressing the probability <span class="math notranslate nohighlight">\(Pr\)</span> that a given patient with parameters (measurements, anamnesis) <span class="math notranslate nohighlight">\(X\)</span> has a heart disease (<span class="math notranslate nohighlight">\(y = 1\)</span>).</p>
+<p>\begin{equation}
+f(X) = Pr(y = 1 | X)
+\tag{1}
+\end{equation}</p>
+<p>Let’s summarize the foresaid in a list of steps:</p>
+<ol class="simple">
+<li><p>Data loading</p></li>
+<li><p>Data cleaning</p></li>
+<li><p>Statistical significance analysis</p></li>
+<li><p>Dimensionality reduction</p></li>
+<li><p>Machine learning</p></li>
+</ol>
+<h2>Data Set Description</h2>
+<p>The data was collected from Cleveland Clinic Foundation. The authors of the database have requested …<br></p>
+<blockquote>
+...that any publications resulting from the use of the data include the 
+names of the principal investigator responsible for the data collection
+at each institution.  They would be:
+<ol class="simple">
+<li><p>Hungarian Institute of Cardiology. Budapest: Andras Janosi, M.D.</p></li>
+<li><p>University Hospital, Zurich, Switzerland: William Steinbrunn, M.D.</p></li>
+<li><p>University Hospital, Basel, Switzerland: Matthias Pfisterer, M.D.</p></li>
+<li><p>V.A. Medical Center, Long Beach and Cleveland Clinic Foundation:
+Robert Detrano, M.D., Ph.D.</p></li>
+</ol>
+</blockquote>
+<p>Description of the data is given in Table 1</p>
+<h3>Table 1</h3>
+<table>
+    <tr>
+        <th>Column #</th>
+        <th>Column label</th>
+        <th>Description</th>
+        <th>Data type</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>age</td>
+        <td>age of patient</td>
+        <td>real number</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>sex</td>
+        <td>0 = female; 1 = male</td>
+        <td>real number</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>cp</td>
+        <td>chest pain type<br> 1 = typical angina<br> 2 = atypical angina<br> 3 = non-anginal pain<br> 4 = asymptomatic</td>
+        <td>real number, categorical</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>trestbps</td>
+        <td>resting blood pressure (in mm Hg)</td>
+        <td>real number</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>chol</td>
+        <td>serum cholesterol in mg/dl</td>
+        <td>real number</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>fbs</td>
+        <td>fasting blood sugar > 120 mg/dl (1 = true; 0 = false)</td>
+        <td>real number</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>restecg</td>
+        <td>resting electrocardiographic results<br> 0 = normal<br> 1 = having ST-T wave abnormality (T wave inversions and/or ST levation or depression of > 0.05 mV)<br> 2 = showing probable or definite left ventricular hypertrophy by Estes' criteria</td>
+        <td>real number, categorical</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>thalach</td>
+        <td>maximum heart rate achieved</td>
+        <td>real number</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>exang</td>
+        <td>exercise induced angina (1 = yes; 0 = no)</td>
+        <td>real number</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>oldpeak</td>
+        <td>ST depression induced by exercise relative to rest</td>
+        <td>real number</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>slope</td>
+        <td>the slope of the peak exercise ST segment<br> 1 = upsloping<br> 2 = flat<br> 3 = downsloping
+        </td>
+        <td>real number</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>ca</td>
+        <td>number of major vessels (0-3) colored by flourosopy</td>
+        <td>real number</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>thal</td>
+        <td>thalassemia - inherited blood disorder that causes your body to have less hemoglobin than normal<br>3 = normal
+            <br>6 = fixed defect<br>7 = reversable defect</td>
+        <td>real number, categorical</td>
+    </tr>
+    <tr>
+        <td>13</td>
+        <td>num</td>
+        <td>diagnosis of heart disease (angiographic disease status)<br> 0 = less than 50% diameter narrowing<br> 1, 2, 3, 4 = more than 50% diameter narrowing</td>
+        <td>real number</td>
+    </tr>
+</table>
+<h2>1. Data loading</h2><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">from</span> <span class="nn">fedddot_transforms.pca</span> <span class="kn">import</span> <span class="n">pca</span>
+<span class="kn">from</span> <span class="nn">fedddot_transforms.lda</span> <span class="kn">import</span> <span class="n">LDA</span>
+
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.precision&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">CSV_FILENAME</span> <span class="o">=</span> <span class="s1">&#39;./res/cleveland_data.csv&#39;</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="s1">&#39;trestbps&#39;</span><span class="p">,</span> <span class="s1">&#39;chol&#39;</span><span class="p">,</span> <span class="s1">&#39;fbs&#39;</span><span class="p">,</span> <span class="s1">&#39;restecg&#39;</span><span class="p">,</span> <span class="s1">&#39;thalach&#39;</span><span class="p">,</span> <span class="s1">&#39;exang&#39;</span><span class="p">,</span> <span class="s1">&#39;oldpeak&#39;</span><span class="p">,</span> <span class="s1">&#39;slope&#39;</span><span class="p">,</span> <span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="s1">&#39;thal&#39;</span><span class="p">,</span> <span class="s1">&#39;num&#39;</span><span class="p">]</span>
+
+<span class="n">raw_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">filepath_or_buffer</span> <span class="o">=</span> <span class="n">CSV_FILENAME</span><span class="p">,</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="n">names</span><span class="p">,</span>
+    <span class="n">index_col</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<h2>2. Data cleaning</h3>
+<h3>2.1. Checking and removing incorrect data</h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, let&#39;s check the dtypes of the dataset</span>
+<span class="c1"># print(&#39;dtypes in raw_data before:\n&#39;, raw_data.dtypes)</span>
+<span class="c1"># After we have found that there are potentially incorrect data in columns ca and thal, let&#39;s check them</span>
+<span class="c1"># print(&#39;unique values in &quot;ca&quot;: &#39;, raw_data[&#39;ca&#39;].unique())</span>
+<span class="c1"># print(&#39;unique values in &quot;thal&quot;: &#39;, raw_data[&#39;thal&#39;].unique())</span>
+<span class="n">raw_data</span> <span class="o">=</span> <span class="n">raw_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;ca&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;?&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;thal&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;?&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;ca&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;ca&#39;</span><span class="p">]);</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;thal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;thal&#39;</span><span class="p">])</span>
+<span class="n">raw_data</span> <span class="o">=</span> <span class="n">raw_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># print(&#39;dtypes in raw_data after:\n&#39;, raw_data.dtypes)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<h3>2.2. Splitting categorical fields</h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp_one_hot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">],</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_axis</span><span class="p">(</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;typical angina&#39;</span><span class="p">,</span> <span class="s1">&#39;atypical angina&#39;</span><span class="p">,</span> <span class="s1">&#39;non-anginal pain&#39;</span><span class="p">,</span> <span class="s1">&#39;asymptomatic&#39;</span><span class="p">],</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;columns&#39;</span>
+<span class="p">)</span>
+
+<span class="n">thal_one_hot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;thal&#39;</span><span class="p">],</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_axis</span><span class="p">(</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;thal norm&#39;</span><span class="p">,</span> <span class="s1">&#39;thal fixed def&#39;</span><span class="p">,</span> <span class="s1">&#39;thal reversable def&#39;</span><span class="p">],</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;columns&#39;</span>
+<span class="p">)</span>
+
+<span class="n">restecg_one_hot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">&#39;restecg&#39;</span><span class="p">],</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_axis</span><span class="p">(</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ecg norm&#39;</span><span class="p">,</span> <span class="s1">&#39;ecg ST-T abnormal&#39;</span><span class="p">,</span> <span class="s1">&#39;ecg hypertrophy&#39;</span><span class="p">],</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;columns&#39;</span>
+<span class="p">)</span>
+
+<span class="n">original_data</span> <span class="o">=</span> <span class="n">raw_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="s1">&#39;thal&#39;</span><span class="p">,</span> <span class="s1">&#39;restecg&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">original_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="n">objs</span> <span class="o">=</span> <span class="p">[</span><span class="n">original_data</span><span class="p">,</span> <span class="n">cp_one_hot</span><span class="p">,</span> <span class="n">thal_one_hot</span><span class="p">,</span> <span class="n">restecg_one_hot</span><span class="p">],</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;columns&#39;</span><span class="p">,</span>
+    <span class="n">join</span> <span class="o">=</span> <span class="s1">&#39;outer&#39;</span><span class="p">,</span>
+    <span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">False</span> 
+<span class="p">)</span>
+
+<span class="c1"># Update values: flat = 0.0, upsloping = 1.0, downsloping = -1.0</span>
+<span class="n">original_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">original_data</span><span class="p">[</span><span class="s1">&#39;slope&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;slope&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">original_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">original_data</span><span class="p">[</span><span class="s1">&#39;slope&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;slope&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">original_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">original_data</span><span class="p">[</span><span class="s1">&#39;slope&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;slope&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+
+<span class="c1"># Update values: 0.0 = no heart disease; 1.0 = heart disease</span>
+<span class="n">original_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">original_data</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;num&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">original_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">original_data</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;num&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">1.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<h2>3. Statistical significance analysis</h2>
+<h3>3.1. General description</h3>
+<p>In order to make a statistically justified decision about which data are usable for making predictions of the diagnosis and which are not, we will consider two patient populations - patients who was diagnosed with heart disease (<span class="math notranslate nohighlight">\(X | y = 1\)</span>) and patients who wasn’t (<span class="math notranslate nohighlight">\(X | y = 0\)</span>)<br>
+Then, for each predictor of each population, we will calculate the parameters of the population - the mean and standard deviation:
+\begin{equation}
+\mu_{X, p(X|y = 0)} = \sum\limits_{i} x_{i}  p(x_{i} | y = 0); \sigma_{X, p(X|y = 0)} = \sqrt{\sum\limits_{i}(x_{i} - \mu_{X, p(X|y = 0)})^{2}}
+\tag{2}
+\end{equation}
+\begin{equation}
+\mu_{X, p(X|y = 1)} = \sum\limits_{j} x_{j}  p(x_{j} | y = 1); \sigma_{X, p(X|y = 1)} = \sqrt{\sum\limits_{j}(x_{j} - \mu_{X, p(X|y = 1)})^{2}}
+\tag{3}
+\end{equation}
+Since the probability distributions <span class="math notranslate nohighlight">\(p(X | y = 0)\)</span> and <span class="math notranslate nohighlight">\(p(X | y = 1)\)</span> are unknown, sample estimates of these parameters will be calculated.<br>
+And finally, a t-test will show whether a given predictor came from its population (“alternative hypothesis”), or the difference in population parameters for a given predictor (if any) is not statistically significant (“null hypothesis”). There are different types of t-test for different applications. In this work, we will use a two-tailed independent t-test, which does not assume equality of variations in the distributions being tested (known as Welch’s t-test). Also we will set significance level <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>. This means that any predictor whose p-value is greater than <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> will be considered to have failed the test and will not be used in further research.<br>
+The calculation results are shown in Figures 1-1 and 1-2 below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we split all predictors by the mean value (large_means and small means) in order to prettify the visualisation</span>
+<span class="n">large_means_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;trestbps&#39;</span><span class="p">,</span> <span class="s1">&#39;chol&#39;</span><span class="p">,</span> <span class="s1">&#39;thalach&#39;</span>
+<span class="p">]</span>
+<span class="n">small_means_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;typical angina&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;atypical angina&#39;</span><span class="p">,</span> <span class="s1">&#39;non-anginal pain&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;asymptomatic&#39;</span><span class="p">,</span> <span class="s1">&#39;thal norm&#39;</span><span class="p">,</span> <span class="s1">&#39;thal fixed def&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;thal reversable def&#39;</span><span class="p">,</span> <span class="s1">&#39;ecg norm&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;ecg ST-T abnormal&#39;</span><span class="p">,</span> <span class="s1">&#39;ecg hypertrophy&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fbs&#39;</span><span class="p">,</span> <span class="s1">&#39;exang&#39;</span><span class="p">,</span> <span class="s1">&#39;oldpeak&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;slope&#39;</span><span class="p">,</span> <span class="s1">&#39;ca&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># pivot_table contains the sample mean and sample std for each population (&#39;num&#39; = 0 and &#39;num&#39; = 1)</span>
+<span class="n">pivot_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">original_data</span><span class="p">,</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">large_means_columns</span> <span class="o">+</span> <span class="n">small_means_columns</span><span class="p">,</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">],</span>
+    <span class="n">aggfunc</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">bar_width</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">bar_larges</span><span class="p">,</span> <span class="n">bar_smalls</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">x_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">large_means_columns</span><span class="p">))</span>
+<span class="n">bar_larges</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">x_coords</span> <span class="o">-</span> <span class="n">bar_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">pivot_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">0.0</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">][</span><span class="n">large_means_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">bar_width</span><span class="p">,</span>
+    <span class="n">edgecolor</span> <span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span>
+    <span class="n">yerr</span> <span class="o">=</span> <span class="n">pivot_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">0.0</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">][</span><span class="n">large_means_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">align</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span><span class="s1">&#39;mean, std (X | Y = 0)&#39;</span>
+<span class="p">)</span>
+<span class="n">bar_larges</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">x_coords</span> <span class="o">+</span> <span class="n">bar_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">pivot_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">1.0</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">][</span><span class="n">large_means_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">bar_width</span><span class="p">,</span>
+    <span class="n">edgecolor</span> <span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span>
+    <span class="n">yerr</span> <span class="o">=</span> <span class="n">pivot_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">1.0</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">][</span><span class="n">large_means_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">align</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span><span class="s1">&#39;mean, std (X | Y = 1)&#39;</span>
+<span class="p">)</span>
+<span class="n">bar_larges</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fig. 1-1 - Large means predictors&#39;</span><span class="p">)</span>
+<span class="n">bar_larges</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predictor label&#39;</span><span class="p">)</span>
+<span class="n">bar_larges</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Estimates of mean, std&#39;</span><span class="p">)</span>
+<span class="n">bar_larges</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">large_means_columns</span><span class="p">,</span> <span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">)</span>
+<span class="n">bar_larges</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">xmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">bar_larges</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">bar_larges</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">x_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">small_means_columns</span><span class="p">))</span>
+<span class="n">bar_smalls</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">x_coords</span> <span class="o">-</span> <span class="n">bar_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">pivot_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">0.0</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">][</span><span class="n">small_means_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">bar_width</span><span class="p">,</span>
+    <span class="n">edgecolor</span> <span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span>
+    <span class="n">yerr</span> <span class="o">=</span> <span class="n">pivot_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">0.0</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">][</span><span class="n">small_means_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">align</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span><span class="s1">&#39;mean, std (X | Y = 0)&#39;</span>
+<span class="p">)</span>
+<span class="n">bar_smalls</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">x_coords</span> <span class="o">+</span> <span class="n">bar_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">pivot_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">1.0</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">][</span><span class="n">small_means_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">bar_width</span><span class="p">,</span>
+    <span class="n">edgecolor</span> <span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span>
+    <span class="n">yerr</span> <span class="o">=</span> <span class="n">pivot_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">1.0</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">][</span><span class="n">small_means_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">align</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span><span class="s1">&#39;mean, std (X | Y = 1)&#39;</span>
+<span class="p">)</span>
+<span class="n">bar_smalls</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fig. 1-2 - Small means predictors&#39;</span><span class="p">)</span>
+<span class="n">bar_larges</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predictor label&#39;</span><span class="p">)</span>
+<span class="n">bar_larges</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Estimates of mean, std&#39;</span><span class="p">)</span>
+<span class="n">bar_smalls</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">small_means_columns</span><span class="p">,</span> <span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">)</span>
+<span class="n">bar_smalls</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">xmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">bar_smalls</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">bar_smalls</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># performing t-test</span>
+<span class="c1"># rejected_columns list contains column names of parameters which didn&#39;t pass the t-test</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">rejected_columns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">columns_subset</span><span class="p">,</span> <span class="n">bar_axis</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">((</span><span class="n">large_means_columns</span><span class="p">,</span> <span class="n">small_means_columns</span><span class="p">),</span> <span class="p">(</span><span class="n">bar_larges</span><span class="p">,</span> <span class="n">bar_smalls</span><span class="p">)):</span>
+    <span class="n">x_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">columns_subset</span><span class="p">))</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="mf">1.1</span> <span class="o">*</span> <span class="n">bar_width</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columns_subset</span><span class="p">):</span>
+        <span class="n">t_statistic</span><span class="p">,</span> <span class="n">pvalue</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span>
+            <span class="n">original_data</span><span class="p">[</span><span class="n">original_data</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">original_data</span><span class="p">[</span><span class="n">original_data</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">equal_var</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="n">alternative</span> <span class="o">=</span> <span class="s1">&#39;two-sided&#39;</span>
+        <span class="p">)</span>
+        <span class="n">colour</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">pvalue</span> <span class="o">&lt;=</span> <span class="n">alpha</span><span class="p">:</span>
+            <span class="n">colour</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rejected_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+            <span class="n">colour</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
+        <span class="n">x_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">columns_subset</span><span class="p">))</span>
+        <span class="n">bar_axis</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_coords</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">dx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;  p_val = </span><span class="si">{</span><span class="n">pvalue</span> <span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colour</span><span class="p">,</span> <span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The following columns were rejected by the t-test:</span><span class="se">\n</span><span class="si">{</span><span class="n">rejected_columns</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">clean_data</span> <span class="o">=</span> <span class="n">original_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">rejected_columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;A new dataset for further analysis was prepared - clean_data. It contains following columns (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">clean_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s1"> total including &quot;num&quot;):</span><span class="se">\n</span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">clean_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics-of-heart-disease_7_0.png" src="_images/diagnostics-of-heart-disease_7_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The following columns were rejected by the t-test:
+[&#39;chol&#39;, &#39;typical angina&#39;, &#39;thal fixed def&#39;, &#39;ecg ST-T abnormal&#39;, &#39;fbs&#39;]
+A new dataset for further analysis was prepared - clean_data. It contains following columns (16 total including &quot;num&quot;):
+[&#39;age&#39;, &#39;sex&#39;, &#39;trestbps&#39;, &#39;thalach&#39;, &#39;exang&#39;, &#39;oldpeak&#39;, &#39;slope&#39;, &#39;ca&#39;, &#39;num&#39;, &#39;atypical angina&#39;, &#39;non-anginal pain&#39;, &#39;asymptomatic&#39;, &#39;thal norm&#39;, &#39;thal reversable def&#39;, &#39;ecg norm&#39;, &#39;ecg hypertrophy&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<h2>4. Dimensionality reduction</h2>
+<h3>4.1. Introduction</h3>
+<p>The data we deal with in this study is relatively high-dimensional. This means that each data sample is a vector of the form: <span class="math notranslate nohighlight">\(X = (x_{1}, x_{2}, ..., x_{k})^{T}\)</span>, where in our case <span class="math notranslate nohighlight">\(k = 15\)</span>. This situation is typical for the data science, often the data dimensionality is even larger.
+Working with high-dimensional data comes with following challenges:</p>
+<ul class="simple">
+<li><p>As the data dimensionality increases, the amount of samples required for an adequate generalization of a machine learning model increases exponentially</p></li>
+<li><p>In most cases, some predictors are correlated with each other, in other words, the data is redundant. Some of the predictors are irrelevant. Irrelevant and redundant features increase the building time of the classifier and reduce the classification accuracy</p></li>
+<li><p>It’s hard to visualize and interpret high-dimensional data</p></li>
+</ul>
+<p>Fortunately, we can reduce the dimensionality of the data. One common way to do this is called Principal Components Analysis (PCA).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since now we will work with a slightly different notation</span>
+<span class="c1"># We will split clean_data dataframe into a dataframe of predictors X and a dataframe of labels y</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">clean_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;num&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">clean_data</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before we proceed, let’s show how the original predictors are correlated with each other. To do this, we normalize the original data and show its correlation matrix</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xnorm</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">Xnorm_columns</span> <span class="o">=</span> <span class="n">Xnorm</span><span class="o">.</span><span class="n">columns</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">Xnorm_columns</span><span class="p">:</span>
+    <span class="n">Xnorm</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">Xnorm</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">Xnorm</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">Xnorm</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">Xnorm</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">/</span> <span class="n">Xnorm</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">Xnorm_cov</span> <span class="o">=</span> <span class="n">Xnorm</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">Xnorm_cov_plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">Xnorm_cov_plot</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">Xnorm_cov</span><span class="p">)</span>
+<span class="n">Xnorm_cov_plot</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fig. 2 - Covariation matrix of normalised data&#39;</span><span class="p">)</span>
+<span class="n">Xnorm_cov_plot</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Xnorm_columns</span><span class="p">)),</span> <span class="n">Xnorm_columns</span><span class="p">,</span> <span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">)</span>
+<span class="n">Xnorm_cov_plot</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Xnorm_columns</span><span class="p">)),</span> <span class="n">Xnorm_columns</span><span class="p">,</span> <span class="n">rotation</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics-of-heart-disease_11_0.png" src="_images/diagnostics-of-heart-disease_11_0.png" />
+</div>
+</div>
+<p>From Figure 2, it is easy to see that the predictors in the original dataset are highly correlated with each other. Let’s fix that!</p>
+<h3>4.2. Principal components analysis</h3>
+<p>Principal Components Analysis (PCA) is one of the most common dimensionality reduction methods. The idea is that we project the vectors <span class="math notranslate nohighlight">\(X\)</span> onto the eugenvectors of the covariance matrix of <span class="math notranslate nohighlight">\(X\)</span>. Obviously, these vectors form an orthogonal basis. Thus, we get the same data in a different, orthogonal (uncorrelated) basis whose coordinates are a linear combination of the original data. Finally, we can choose not all, but only a few eugenvectors corresponding to the largest eugenvalues ​​of the covariance matrix. Thus we will reduce the dimensionality of the original data to some arbitrarily chosen value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># function pca takes two arguments - the original data X (pandas.DataFrame) and number of principal components to return num_pca (int),</span>
+<span class="c1"># and returns transformed dataset Xpca (pandas.DataFrame) with columns {PC0, PC1, ..., PCk-1}, where k = num_pca,</span>
+<span class="c1"># array of eugenvalues L and eugenvectors V (both np.ndarray)</span>
+
+<span class="n">Xpca</span><span class="p">,</span> <span class="n">Lpca</span><span class="p">,</span> <span class="n">Vpca</span> <span class="o">=</span> <span class="n">pca</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pc_num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the number of dimensions in the new Xpca dataset is 3, we can easily visualize this data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">pca_scatter</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+<span class="n">pca_scatter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">Xpca</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="s1">&#39;PC0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+    <span class="n">Xpca</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="s1">&#39;PC1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>  
+    <span class="n">Xpca</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="s1">&#39;PC2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+    <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Xpca | y = 0&#39;</span><span class="p">)</span>
+<span class="n">pca_scatter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">Xpca</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;PC0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+    <span class="n">Xpca</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;PC1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>  
+    <span class="n">Xpca</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;PC2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+    <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Xpca | y = 1&#39;</span><span class="p">)</span>
+<span class="n">pca_scatter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="mf">0.0</span><span class="p">,</span> 
+    <span class="mf">0.0</span><span class="p">,</span>  
+    <span class="mf">0.0</span><span class="p">,</span> 
+    <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;O(0, 0, 0)&#39;</span><span class="p">)</span>
+<span class="n">pca_scatter</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fig. 3 - PCA data&#39;</span><span class="p">)</span>
+<span class="n">pca_scatter</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">pca_scatter</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">pca_scatter</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span> <span class="o">=</span> <span class="mi">55</span><span class="p">,</span> <span class="n">azim</span> <span class="o">=</span> <span class="mi">88</span><span class="p">)</span>
+<span class="n">pca_scatter</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">Xpca</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="n">pca_scatter</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">Xpca</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="n">pca_scatter</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="n">Xpca</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics-of-heart-disease_15_0.png" src="_images/diagnostics-of-heart-disease_15_0.png" />
+</div>
+</div>
+<p>Figure 3 is an excellent illustration of how powerful PCA can be. In the figure, we can observe 2 interesting phenomena:</p>
+<ul class="simple">
+<li><p>The data belonging to the considered populations (patients who was diagnosed with heart desease - red points, and patients who wasn’t - green points) lie on opposite sides of some three-dimensional surface separating them. Of course, this separation is not perfect, and we can see an overlap in their distributions.</p></li>
+<li><p>Regardless of the diagnosis, the general population of patients also divided into two “clouds” located at a sufficiently big distance from each other. Thus, we can constrain the data distribution with additional priors:</p></li>
+</ul>
+<p>\begin{equation}
+X_{pca} \in cloud_{1}, X_{pca} \in cloud_{2}
+\tag{4}
+\end{equation}</p>
+<p>But how can we know if a given data point belongs to cloud 1 or cloud 2? Linear discriminant analysis comes to the rescue.</p>
+<h3>4.3. Linear discriminant analysis (LDA)</h3>
+<p>Let’s take a look at Figure 3 again and imagine that we can draw a plane between the two “clouds”, defined by the equation:</p>
+<p>\begin{equation}
+A \cdot PC_{0} +\ B \cdot PC_{1} +\ C \cdot PC_{2} +\ D = 0
+\tag{5}
+\end{equation}</p>
+<p>Then the height of any data point <span class="math notranslate nohighlight">\(x_{pca_{0}} = (PC_{0_{0}}, PC_{1_{0}}, PC_{2_{0}})\)</span>  above this plane is given by the equation:</p>
+<p>\begin{equation}
+h(x_{pca_{0}}) = \frac
+{
+A \cdot PC_{0_{0}} +\ B \cdot PC_{1_{0}} +\ C \cdot PC_{2_{0}} +\ D
+}
+{
+\sqrt
+{
+A^{2} +\ B^{2} +\ C^{2}
+}
+}
+\tag{6}
+\end{equation}</p>
+<p>Thus, the heights of all points lying above the plane described by equation (5) will have a “+” sign, and the heights of all points lying under the plane will have a “-” sign.<br>
+The plane parameters A, B, C, D can be learned from the data. To do this, we need to define a loss function. We expect from the ML algorithm that, on the one hand, it maximizes the distance between the means of positive and negative heights <span class="math notranslate nohighlight">\(h\)</span>, on the other hand, it minimizes the height variation. This can be expressed by the following equations:</p>
+<p>\begin{equation}
+\mu_{h^{+}} = \mu(h|h&gt;0); \sigma_{h^{+}} = \sigma(h|h&gt;0)
+\tag{7}
+\end{equation}</p>
+<p>\begin{equation}
+\mu_{h^{-}} = \mu(h|h \leq 0); \sigma_{h^{-}} = \sigma(h|h \leq 0)
+\tag{8}
+\end{equation}</p>
+<p>\begin{equation}
+f_{loss} = k_{\sigma} \cdot (\sigma_{h^{-}} + \sigma_{h^{+}}) + k_{\mu} \cdot \frac{1}{\mu_{h^{+}} - \mu_{h^{-}}}
+\tag{9}
+\end{equation}</p>
+<p>This algorithm is implemented in the fedddot_transforms package. It uses the Pytorch framework for training.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lda_dimensionality</span> <span class="o">=</span> <span class="n">Xpca</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">lda</span> <span class="o">=</span> <span class="n">LDA</span><span class="p">(</span><span class="n">Hin</span> <span class="o">=</span> <span class="n">lda_dimensionality</span><span class="p">)</span>
+
+<span class="c1"># We don&#39;t have to train the LDA model each time we run this cell, we can just load the parameters from the file</span>
+<span class="n">lda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;./fedddot_transforms/lda.model&#39;</span><span class="p">)</span>
+
+<span class="c1"># But if we want, we can just uncomment the following lines:</span>
+<span class="c1"># Etr = lda.train(</span>
+<span class="c1">#     dataFrame = Xpca,</span>
+<span class="c1">#     coordLables = Xpca.columns,</span>
+<span class="c1">#     Nbatch = 50,</span>
+<span class="c1">#     schedule = [(0.1, 100), (0.05, 100), (0.01, 100)]</span>
+<span class="c1"># )</span>
+<span class="c1"># torch.save(lda, &#39;./fedddot_transforms/lda.model&#39;)</span>
+<span class="c1"># fig, Etr_plot = plt.subplots(figsize = (5, 2))</span>
+<span class="c1"># Etr_plot.plot(np.arange(len(Etr)), Etr, label = &#39;LDA training dynamics&#39;)</span>
+<span class="c1"># Etr_plot.legend()</span>
+<span class="c1"># plt.show()</span>
+
+<span class="n">Xpca_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">Xpca</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">float</span>
+<span class="p">)</span>
+<span class="c1"># h_tensor contains the heights for each data point from Xpca_tensor</span>
+<span class="n">h_tensor</span> <span class="o">=</span> <span class="n">lda</span><span class="p">(</span><span class="n">Xpca_tensor</span><span class="p">)</span>
+<span class="c1"># we convert h_tensor to Pandas series</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">h_tensor</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">Xpca</span><span class="o">.</span><span class="n">index</span>
+<span class="p">)</span>
+
+<span class="n">Xpca_lda</span> <span class="o">=</span> <span class="n">Xpca</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># and merge the h-series column with PCA coordinates </span>
+<span class="n">Xpca_lda</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="n">Xpca_lda</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="c1"># then, to prevent the redundancy of the data we perform PCA on Xpca_lda once again</span>
+<span class="n">Xlda</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">pca</span><span class="p">(</span><span class="n">Xpca_lda</span><span class="p">,</span> <span class="n">pc_num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">Xlda</span> <span class="o">=</span> <span class="n">Xlda</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;PC0&#39;</span><span class="p">:</span> <span class="s1">&#39;LD0&#39;</span><span class="p">,</span> <span class="s1">&#39;PC1&#39;</span><span class="p">:</span> <span class="s1">&#39;LD1&#39;</span><span class="p">,</span> <span class="s1">&#39;PC2&#39;</span><span class="p">:</span> <span class="s1">&#39;LD2&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">pca_lda_scatter</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">lda_scatter</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">y_condition</span><span class="p">,</span> <span class="n">y_title</span><span class="p">,</span> <span class="n">y_colour</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;y = 0&#39;</span><span class="p">,</span> <span class="s1">&#39;y = 1&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">]</span>
+    <span class="p">):</span>
+    <span class="n">lda_scatter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">Xlda</span><span class="p">[</span><span class="n">y_condition</span><span class="p">][</span><span class="s1">&#39;LD0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+        <span class="n">Xlda</span><span class="p">[</span><span class="n">y_condition</span><span class="p">][</span><span class="s1">&#39;LD1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+        <span class="n">Xlda</span><span class="p">[</span><span class="n">y_condition</span><span class="p">][</span><span class="s1">&#39;LD2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>  
+        <span class="n">color</span> <span class="o">=</span> <span class="n">y_colour</span><span class="p">,</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Xlda | </span><span class="si">{</span><span class="n">y_title</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">h_condition</span><span class="p">,</span> <span class="n">h_title</span><span class="p">,</span> <span class="n">h_point_style</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">h</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="n">h</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;h &lt;= 0&#39;</span><span class="p">,</span> <span class="s1">&#39;h &gt; 0&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;^&#39;</span><span class="p">]</span>
+        <span class="p">):</span>
+
+        <span class="n">pca_lda_scatter</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="n">Xpca</span><span class="p">[</span><span class="n">y_condition</span> <span class="o">&amp;</span> <span class="n">h_condition</span><span class="p">][</span><span class="s1">&#39;PC0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+            <span class="n">Xpca</span><span class="p">[</span><span class="n">y_condition</span> <span class="o">&amp;</span> <span class="n">h_condition</span><span class="p">][</span><span class="s1">&#39;PC1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+            <span class="n">Xpca</span><span class="p">[</span><span class="n">y_condition</span> <span class="o">&amp;</span> <span class="n">h_condition</span><span class="p">][</span><span class="s1">&#39;PC2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>  
+            <span class="n">color</span> <span class="o">=</span> <span class="n">y_colour</span><span class="p">,</span>
+            <span class="n">marker</span> <span class="o">=</span> <span class="n">h_point_style</span><span class="p">,</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Xpca | </span><span class="si">{</span><span class="n">y_title</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">h_title</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">lda</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">pca_lda_scatter</span><span class="p">,</span>
+    <span class="n">x_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">y_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">lda_scatter</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fig. 4 - 2 - LDA data&#39;</span><span class="p">)</span>
+<span class="n">lda_scatter</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">lda_scatter</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">lda_scatter</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span> <span class="o">=</span> <span class="mi">55</span><span class="p">,</span> <span class="n">azim</span> <span class="o">=</span> <span class="mi">88</span><span class="p">)</span>
+<span class="n">lda_scatter</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">Xlda</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="n">lda_scatter</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">Xlda</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="n">lda_scatter</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="n">Xlda</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">pca_lda_scatter</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fig. 4 - 1 - PCA data with LDA plane&#39;</span><span class="p">)</span>
+<span class="n">pca_lda_scatter</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">pca_lda_scatter</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">pca_lda_scatter</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span> <span class="o">=</span> <span class="mi">55</span><span class="p">,</span> <span class="n">azim</span> <span class="o">=</span> <span class="mi">88</span><span class="p">)</span>
+<span class="n">pca_lda_scatter</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">Xpca</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="n">pca_lda_scatter</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">Xpca</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="n">pca_lda_scatter</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="n">Xpca</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/diagnostics-of-heart-disease_18_0.png" src="_images/diagnostics-of-heart-disease_18_0.png" />
+</div>
+</div>
+<h3>4.4. Conclusion regarding data transformations</h3>
+<p>In this section, we performed data dimensionality reduction using PCA method, visualized the obtained data in the three-dimensional space of coordinates <span class="math notranslate nohighlight">\((PC_{0}, PC_{1}, PC_{2})\)</span>, found the concentration of data in two large clusters, and performed an additional transformation of coordinates using LDA method so that these clusters were located on opposite sides of the <span class="math notranslate nohighlight">\((LD_{0}, LD_{2})\)</span> coordinate plane (see fig. 4-1, 4-2).<br></p>
+<p>Now we have three datasets: <span class="math notranslate nohighlight">\(X\)</span> - original dataset (direct measurements of patient parameters, 15 predictors total), <span class="math notranslate nohighlight">\(X_{pca}\)</span> - PCA-derived dataset, and <span class="math notranslate nohighlight">\(X_{lda}\)</span> - LDA-derived dataset.<br>
+We can now build three logistic regression models predicting the diagnosis using these three datasets and compare the accuracy of these models.</p>
+<h2>5. Prediction</h2>
+<p>We have come to the final stage of the study - building machine learning models to predict the diagnosis (<span class="math notranslate nohighlight">\(y\)</span> value) from the observed data (<span class="math notranslate nohighlight">\(X, X_{pca}, X_{lda}\)</span>).<br></p>
+<p>In this work, we will use the logistic regression model from the sklern package. In order to obtain an objective assessment of the accuracy of the models, we will train each model using 3 different optimizers, calculate the confusion matrices, and evaluate the sensitivity and specificity of the models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solvers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sag&#39;</span><span class="p">,</span> <span class="s1">&#39;newton-cg&#39;</span><span class="p">,</span> <span class="s1">&#39;lbfgs&#39;</span><span class="p">]</span>
+<span class="n">datasets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;X&#39;</span><span class="p">:</span> <span class="n">X</span><span class="p">,</span>
+    <span class="s1">&#39;Xpca&#39;</span><span class="p">:</span> <span class="n">Xpca</span><span class="p">,</span>
+    <span class="s1">&#39;Xlda&#39;</span><span class="p">:</span> <span class="n">Xlda</span>
+<span class="p">}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">solvers</span><span class="p">),</span> <span class="n">ncols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">datasets</span><span class="p">),</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">solver</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">solvers</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="p">(</span><span class="n">data_title</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">logRegression</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span>
+            <span class="n">penalty</span> <span class="o">=</span> <span class="s1">&#39;l2&#39;</span><span class="p">,</span>
+            <span class="n">tol</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+            <span class="n">solver</span> <span class="o">=</span> <span class="n">solver</span><span class="p">)</span>
+
+        <span class="n">logRegression</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+        <span class="n">y_predicted</span> <span class="o">=</span> <span class="n">logRegression</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">logRegression</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+        <span class="n">confusion_matrix</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_predicted</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y_test&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;y_predicted&#39;</span><span class="p">)</span>
+
+        <span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">J</span><span class="p">):</span>
+                <span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+        
+        <span class="n">true_positives</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">true_negatives</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">false_positives</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">false_negatives</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">sensitivity</span> <span class="o">=</span> <span class="n">true_positives</span> <span class="o">/</span> <span class="p">(</span><span class="n">true_positives</span> <span class="o">+</span> <span class="n">false_negatives</span><span class="p">)</span>
+        <span class="n">specificity</span> <span class="o">=</span> <span class="n">true_negatives</span> <span class="o">/</span> <span class="p">(</span><span class="n">true_negatives</span> <span class="o">+</span> <span class="n">false_positives</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        Confusion matrix</span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">        Data = </span><span class="si">{</span><span class="n">data_title</span><span class="si">}</span><span class="s2">; Solver = </span><span class="si">{</span><span class="n">solver</span><span class="si">}</span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">        Score = </span><span class="si">{</span><span class="n">score</span> <span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">; Sens = </span><span class="si">{</span><span class="n">sensitivity</span> <span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">; Spec = </span><span class="si">{</span><span class="n">specificity</span> <span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Fig. 5 - Comparison of models performance&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\prj\heart_diseases\env\lib\site-packages\sklearn\linear_model\_logistic.py:444: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+</pre></div>
+</div>
+<img alt="_images/diagnostics-of-heart-disease_20_1.png" src="_images/diagnostics-of-heart-disease_20_1.png" />
+</div>
+</div>
+<h2>Conclusions</h2>
+<p>From the data observed in Figure 5, the following conclusions can be made:</p>
+<ul class="simple">
+<li><p>Models using data <span class="math notranslate nohighlight">\(X_{pca}\)</span> and <span class="math notranslate nohighlight">\(X_{lda}\)</span> are not sensitive to the choice of optimizer - they achieved the same results in different tests.</p></li>
+<li><p>The model using data <span class="math notranslate nohighlight">\(X\)</span> achieved the worst results when using the sag optimizer, and the best results with the newton-cg and lbfgs optimizers.</p></li>
+<li><p>We could mistakenly conclude that the use of PCA and LDA was unnecessary, because the <span class="math notranslate nohighlight">\(X\)</span>-based model without any data preprocessing achieved the best result. But let’s take a look at the sensitivity of the three models (“Sens” in the figure). Sensitivity measures how well the model predicts a true-positive diagnosis in patients who actually have heart disease. In this case, sensitivity is the most important factor of models performance comparison, because we would rather make a mistake and give a false positive diagnosis to a healthy patient than a false negative to a sick one. Thus, we conclude that models based on <span class="math notranslate nohighlight">\(X_{pca}\)</span> and <span class="math notranslate nohighlight">\(X_{lda}\)</span> have a significantly better performance.</p></li>
+</ul>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Idan Rom<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
